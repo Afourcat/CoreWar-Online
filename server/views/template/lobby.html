@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>CoreWar</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/style.css">
+		<link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+		<script>
+			const socket = io.connect('/lobby');
+
+			$(document).ready(function () {
+				socket.on('lobby-name', function(name) {
+					console.log(name);
+					$('#Name').html = name;
+				});
+			});
+		</script>
+	</head>
+	<body id="MainPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+
+		<!-- Front -->
+		<div class="jumbotron text-center">
+			<h1 id="Name"></h1>
+			<h2>In core we trust.</h2>
+		</div>
+
+		<!-- container-fluid: End -->
+			<footer id="End" class="container-fluid text-center">
+				<a href="#MainPage"><span id="little-glyph" class="glyphicon glyphicon-chevron-up"></span></a>
+				<p class="text-left">Copyright:	 Thomas  Lucas  Quentin  <a href="https://github.com/Afourcat">Alex</a></p>
+			</footer>
+
+		</body>
+</html>
