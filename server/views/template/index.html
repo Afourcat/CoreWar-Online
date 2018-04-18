@@ -1,0 +1,48 @@
+<!Doctype html>
+<html>
+    <head>
+        <title>C0MB4T Z0N3</title>
+    </head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io.connect('/combat');
+
+      function updateContext(data, ctx) {
+        var y = 0;
+        var x = 0;
+        var imgData = ctx.getImageData(0, 0, 1280, 480);
+        var data = imgData.data;
+
+        for (var y = 0; y < 480; ++y) {
+            for (var x = 0; x < 1280; ++x) {
+                var index = ((y * (1280 * 4)) + (x * 4));
+                var value = x * y & 0xff;
+
+                data[index] = value;//red
+                data[++index] = value;//green
+                data[++index] = value;//blue
+                data[++index] = 255;//alpha
+            }
+            console.log(index);
+          }
+        ctx.putImageData(imgData, 0, 0);
+      }        
+      
+      var lo = [];
+
+      $(document).ready(function () {
+        var canv = document.getElementById('my-canvas');
+        var ctx = canv.getContext('2d');
+
+        updateContext(lo, ctx);
+        socket.on('datas', function(arr) {
+           console.log('Updating canvas');
+           updateContext(arr, ctx.imageData(0, 0, 1280, 480));
+        });
+      });
+    </script>
+    <body>
+        <canvas id="my-canvas" width="1280" height="480" style="border:1px solid #000000;"></canvas>
+    </body>
+</html>
