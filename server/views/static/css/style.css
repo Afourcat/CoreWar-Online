@@ -9,6 +9,44 @@ ul.nav a:hover , a.navbar-brand:hover {
 	color: orange !important;
 }
 
+#blue-button {
+	width: 200px;
+	height: 40px;
+	color: white;
+	border-radius: 10px;
+	box-shadow: 5px 5px 5px grey;
+	font: 400 20px 'Oswald', sans-serif;
+	text-align: center;
+	background-color: blue;
+}
+
+#blue-button:hover {
+	width: 200px;
+	height: 40px;
+	color: white;
+	border-radius: 10px;
+	text-align: center;
+	font: 400 22px 'Oswald', sans-serif;
+	background-color: blue;
+}
+
+#browser-file {
+	display: flex;
+	margin: 15% 15%;
+	justify-content: space-around;
+	justify-items: auto;
+	position: absolute;
+	margin: 15% 15%;
+}
+
+#footer-end {
+	position: absolute;
+	bottom: 0;
+	background-color:  #252525;
+	color: white;
+	width: 100%;
+}
+
 .blue-link {
 	color: #D1591f;
 }
@@ -17,7 +55,7 @@ ul.nav a:hover , a.navbar-brand:hover {
 	background-color:  #252525;
 	color: white;
 	margin-bottom: -40px;
-	size
+	size: 100%;
 }
 
 body {
