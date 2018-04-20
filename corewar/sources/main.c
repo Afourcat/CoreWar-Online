@@ -5,6 +5,7 @@
 ** main function of the corewar
 */
 
+#include <unistd.h>
 #include "utils.h"
 #include "my_printf.h"
 #include "corewar.h"
@@ -82,6 +83,7 @@ int main(int argc, char *argv[])
 {
 	core_t *corewar = create_core();
 	int err = 0;
+	int nb_cycle = 0;
 
 	if (parse_args(argc, argv, corewar) == -1) {
 		my_printf("usage\n");
@@ -95,7 +97,13 @@ int main(int argc, char *argv[])
 #ifdef DEBUG_MODE
 	dump_virtual_mem_color(corewar->memory, corewar->owner_table, corewar);
 #endif
-	while (is_champ_alive(corewar))
+	while (is_champ_alive(corewar)) {
 		cycle(corewar);
+		if (nb_cycle % 100) {
+			dump_virtual_mem_color(corewar->memory, corewar->owner_table, corewar);
+			write(1, "====\n", 5);
+		}
+		nb_cycle++;
+	}
 	return (0);
 }
