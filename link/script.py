@@ -2,6 +2,9 @@
 import sys
 import PIL.Image as Image
 import numpy as np
+import websockets
+import base64
+import os
 
 png = 0
 
@@ -20,15 +23,19 @@ def transform(string):
 
 def process_dump(string):
     global png
-    data = string.split("\x1b[0m")
-    data = list(filter(lambda str: str if len(str) and not (len(str) == 12 and str.find(":") != -1) else 0, data))
-    data = list(map(lambda str: str[11:] if str[0] == "\n" else str, data))
-    data[0] = data[0][11:]
-    data = list(map(transform, data))[:-1]
-    arr = np.reshape(np.array(data, dtype=np.uint8), (64, 96, 3))
-    image = Image.fromarray(arr, "RGB")
-    image.save("file" + str(png) + ".png")
-    png += 1
+    with websockets.connect('ws://localhost:3000/image') as websocket
+        data = string.split("\x1b[0m")
+        data = list(filter(lambda str: str if len(str) and not (len(str) == 12 and str.find(":") != -1) else 0, data))
+        data = list(map(lambda str: str[11:] if str[0] == "\n" else str, data))
+        data[0] = data[0][11:]
+        data = list(map(transform, data))[:-1]
+        arr = np.reshape(np.array(data, dtype=np.uint8), (64, 96, 3))
+        image = Image.fromarray(arr, "RGB")
+        image.save("file.png")
+        with open("file.png", "rb") as f:
+            websocket.send(base64.b64encode(f.read()))
+        os.system("rm file.png")
+
 
 string = ""
 new_str = "a"
