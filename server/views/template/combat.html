@@ -38,11 +38,15 @@
         updateContext(lo, ctx);
         socket.on('datas', function(arr) {
            console.log('Updating canvas');
-           updateContext(arr, ctx.imageData(0, 0, 1280, 480));
+           if (arr == undefined) {
+               alert("Waiting for image");
+           }
+           document.getElementById("core").innerHTML = Buffer.from(arr, 'base64');
+           //updateContext(arr, ctx.imageData(0, 0, 1280, 480));
         });
       });
     </script>
     <body>
-        <canvas id="my-canvas" width="1280" height="480" style="border:1px solid #000000;"></canvas>
+        <img alt="Waiting" id="core">
     </body>
 </html>

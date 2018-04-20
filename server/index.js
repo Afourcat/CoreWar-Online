@@ -17,13 +17,35 @@ for (let nb = 0; nb < 4; ++nb) {
 	});
 }
 
+//Root logic
+
 app.get('/', function(req, res) {
 	res.sendFile(__dirname + "/views/template/index.html");
+});
+
+//Combat logic ----
+
+var image = io.of('/image');
+var combat = io.of('/combat');
+var dataImage = undefined;
+
+image.on('connection', function (socket) {
+	socket.on('image', function(data) {
+		dataImage = data;
+	});
 });
 
 app.get('/combat/', function(req, res) {
 	res.sendFile(__dirname + "/views/template/combat.html");
 });
+
+combat.on('connection', function(socket) {
+	socket.emit('datas', dataImage);
+});
+
+
+
+//Lobby logic ----
 
 var lobby = io.of('/lobby');
 
@@ -49,31 +71,14 @@ lobby.on('connection', function(socket) {
 	});
 });
 
-app.post('/', function(req, res) {
-	console.log("MABITE");
-
-});
-
-app.post('/warrior', function(req, res) {
-	var warrior0 = req.body['warrior0'];
-	var warrior1 = req.body['warrior1'];
-	var warrior2 = req.body['warrior2'];
-	var warrior3 = req.body['warrior3'];
-	console.log("POPO" , warrior0);
-});
-
 app.post('/lobby/', function (req, res) {
 	console.log("suce");
 	lobby_name = req.body['suce'];
 	res.redirect('/lobby/');
 });
 
-var combat = io.of('/combat');
 
-combat.on('connection', function(socket) {
-	console.log('socket ' + socket.id + ' connected on /combat');
-});
-
+//Listener on port 3000
 server.listen(3000, function() {
 	console.log("Listenning on port 3000");
 });
