@@ -20,16 +20,29 @@
 				});
 			});
 
-			function emit() {
-				var val = 10;
-				socket.emit('input-file', val);
+			function emitAll() {
+				var ollo = ["war0", "war1", "war2", "war3"];
+
+				for (var value of ollo) {
+					console.log("Enit", value);
+					emit(value);
+				}
 			}
 
-			$('form').submit(function (event) {
-				event.preventDefault();
-				var elem = document.getElementById('0').value;
-				socket.emit('input-file', elem);
-			});	
+			function emit(id) {
+				var file = document.getElementById(id);
+				
+				if (file.files.length) {
+					var reader = new FileReader();
+					
+					reader.onload = function (elem) {
+						socket.emit('input-file', elem.target.result);
+					};
+				}
+
+				reader.readAsBinaryString(file.files[0]);
+			}
+
 		</script>
 	</head>
 	<body id="MainPage" data-spy="scroll" data-target=".navbar" data-offset="60">
@@ -40,12 +53,12 @@
 			<h2>In core we trust.</h2>
 		</div>
 	
-		<form id="browser-file" enctype="multipart/form-data">
-			<input type="file" id="0" name="warrior0" placeholder="XtremAtor" multiple="multiple">
-			<input type="file" id="1" name="warrior1" placeholder="Gogolito2000xX" multiple="multiple">
-			<input type="file" id="2" name="warrior2" placeholder="Nicollex/T3Rm1N4Tor" multiple="multiple">
-			<input type="file" id="3" name="warrior3" placeholder="MrPopo" multiple="multiple">
-			<button id="blue-button" type="submit" onclick="emit()" form="browser-file">Start !</button>
+		<form id="browser-file" enctype="multipart/form-data" onsubmit="return false;">
+			<input type="file" id="war0" name="warrior0" placeholder="XtremAtor" multiple="multiple">
+			<input type="file" id="war1" name="warrior1" placeholder="Gogolito2000xX" multiple="multiple">
+			<input type="file" id="war2" name="warrior2" placeholder="Nicollex/T3Rm1N4Tor" multiple="multiple">
+			<input type="file" id="war3" name="warrior3" placeholder="MrPopo" multiple="multiple">
+			<button id="blue-button" type="submit" onclick="emitAll()" form="browser-file">Start !</button>
 		</form>
 		<!-- container-fluid: End -->
 			<footer id="footer-end" class="container-fluid text-center">
