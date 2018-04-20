@@ -27,20 +27,22 @@
 					console.log("Enit", value);
 					emit(value);
 				}
+				window.location.replace("http://localhost:3000/combat");
 			}
 
 			function emit(id) {
 				var file = document.getElementById(id);
-				
-				if (file.files.length) {
-					var reader = new FileReader();
-					
-					reader.onload = function (elem) {
-						socket.emit('input-file', elem.target.result);
-					};
+			
+				console.log(file);
+				if (file) {
+					if (file.files.length) {
+						var reader = new FileReader();
+						reader.onload = function (elem) {
+							socket.emit('input-file', elem.target.result);
+						};
+					}	
+					reader.readAsBinaryString(file.files[0]);
 				}
-
-				reader.readAsBinaryString(file.files[0]);
 			}
 
 		</script>
