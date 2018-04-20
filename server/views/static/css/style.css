@@ -1,0 +1,121 @@
+.jumbotron {
+	background-color: #3437d5;
+	color: #fff;
+	padding: 100px 25px;
+	font-family: 'Oswald', sans-serif;
+}
+
+ul.nav a:hover , a.navbar-brand:hover {
+	color: orange !important;
+}
+
+#blue-button {
+	width: 200px;
+	height: 40px;
+	color: white;
+	border-radius: 10px;
+	box-shadow: 5px 5px 5px grey;
+	font: 400 20px 'Oswald', sans-serif;
+	text-align: center;
+	background-color: blue;
+}
+
+#blue-button:hover {
+	width: 200px;
+	height: 40px;
+	color: white;
+	border-radius: 10px;
+	text-align: center;
+	font: 400 22px 'Oswald', sans-serif;
+	background-color: blue;
+}
+
+#browser-file {
+	display: flex;
+	margin: 15% 15%;
+	justify-content: space-around;
+	justify-items: auto;
+	position: absolute;
+	margin: 15% 15%;
+}
+
+#footer-end {
+	position: absolute;
+	bottom: 0;
+	background-color:  #252525;
+	color: white;
+	width: 100%;
+}
+
+.blue-link {
+	color: #D1591f;
+}
+
+#End {
+	background-color:  #252525;
+	color: white;
+	margin-bottom: -40px;
+	size: 100%;
+}
+
+body {
+	background-color: #eaeaff;
+	font: 400 15px 'Oswald', sans-serif;
+}
+
+.container-fluid {
+	padding: 80px 50px;
+	color: #000;
+	background-color: #eaeaff
+}
+
+#little-glyph {
+	font-size: 20px;
+}
+
+#big-glyph {
+	font-size: 120px;
+	color: #3437d5;
+}
+
+#How {
+	background-color: #3437d5;
+	color: #fff;
+	padding: 100px 25px;
+	font-family: 'Oswald', sans-serif;
+}
+
+.play {
+	padding: 80px 20px;
+	font-size: 130px;
+	font-family: 'Anton', sans-serif;
+}
+
+#play-button {
+	padding: 20px 20px;
+	font-size: 20px;
+	border-radius: 0px;
+}
+
+.color-blue {
+	background-color: #343fff;
+	color: white;
+}
+
+.input-group {
+	margin-left: 150px;
+	margin-right: 150px;
+}
+
+.form-group {
+	text-align: center;
+}
+
+img {
+	margin-top: 100px;
+	margin-bottom: 20px;
+}
+
+.bild {
+	font-family: 'Anton', sans-serif;
+}
