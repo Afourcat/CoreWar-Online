@@ -23,7 +23,7 @@ def transform(string):
 
 def process_dump(string):
     global png
-    with websockets.connect('ws://localhost:3000/image') as websocket
+    with websockets.connect('ws://localhost:3000/image') as websocket:
         data = string.split("\x1b[0m")
         data = list(filter(lambda str: str if len(str) and not (len(str) == 12 and str.find(":") != -1) else 0, data))
         data = list(map(lambda str: str[11:] if str[0] == "\n" else str, data))
